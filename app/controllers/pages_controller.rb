@@ -1,9 +1,8 @@
 class PagesController < ApplicationController
 
   def index
-    @works = Work.all
-    @books = Work.select{ |work| work.category == "book" }
-    @albums = Work.select{ |work| work.category == "album" }
-    @movies = Work.select{ |work| work.category == "movie" }
+    @books = Work.books
+    @albums= Work.albums
+    @movies = Work.movies
   end
 end
