@@ -1,0 +1,26 @@
+<h3><%= header %></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Creator</th>
+      <th>Year</th>
+      <th>Description</th>
+      <th>Upvote</th>
+ 
+    </tr>
+  </thead>
+
+  <tbody>
+    <% works.each do |work| %>
+      <tr>
+        <td><%=  link_to work.title , work %></td>
+        <td><%= work.creator %></td>
+        <td><%= work.year %></td>
+        <td><%= work.description %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
