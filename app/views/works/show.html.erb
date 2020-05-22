@@ -25,6 +25,29 @@
   <%= @work.description %>
 </p>
 
+<%= link_to 'Back to Media ranks', works_path %> |
 <%= link_to 'Edit', edit_work_path(@work) %> |
-<%= link_to 'Back', works_path %> |
-<%= link_to "Delete", work_path(@work), method: :delete, data: {confirm: "Are you sure to delete #{@work.title}?"}%>
+<%= link_to "Upvote", upvote_path(@work), method: :post %> |
+<%= link_to "Delete", work_path(@work), method: :delete, data: {confirm: "Are you sure to delete #{@work.title}?"}%> 
+
+<section class="works-votes__container">
+  <h3 class="works-votes__header"> <%= @work.votes.count%> Votes for this <%= @work.category%></h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <% @work.votes.each do |vote| %>
+       <tr>
+        <td><%= link_to vote.user.username, user_path(vote.user.id) %></td>
+        <td><%= vote.created_at.strftime("%b %d, %Y")%> </td>
+      
+       </li>
+    <% end %>
+
+  </ul>
+</section>
