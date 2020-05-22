@@ -11,11 +11,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <% flash.each do |name, message| %>
-      <div class="alert alert-<%= name %>" role="alert">
-        <%= message.html_safe %>
-      </div>
-    <% end %>
+    
 ​
     <header class="text-center"></header>
 
@@ -23,7 +19,7 @@
     <header class="app-header__header">
     <h1>
       <a href="/">Media Ranker</a>
-      <br>
+    
       <small>Ranking the Best of Everything</small>
     </h1>
 
@@ -42,14 +38,27 @@
           <a class="nav-link" href="/users">View all users</a>
         </li>
       </ul>
+     
+        
+
+      <%if session[:user_id]%>
       <ul class="nav app-header__user-nav-container">
-
-        <li class="nav-item app-header__nav_item">
-          <a class="btn btn-primary" href="/login">Log In</a>
-        </li>
-
+        <li class= "nav-item app-header__nav_item"><%=link_to "Logged in as #{session[:username]}", current_user_path(session[:user_id]), :class => "btn btn-primary"%></li>
+        <li class= "nav-item app-header__nav_item"><%=link_to "Log out", logout_path, :class => "btn btn-primary", :method => :post %></li>
       </ul>
+      <%elsif session[:id] == nil%>
+      <ul class="nav app-header__user-nav-container">
+        <li class= "nav-item app-header__nav_item"><%=link_to "Log In", login_path, :class => "btn btn-primary"%></li> 
+      </ul>
+      <% end %>
+
     </nav>
+
+    <% flash.each do |name, message| %>
+      <div class="alert alert-<%= name %>" role="alert">
+        <%= message.html_safe %>
+      </div>
+    <% end %>
   </header>
 ​
     <main role="main">
