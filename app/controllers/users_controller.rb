@@ -24,12 +24,14 @@ class UsersController < ApplicationController
     user = User.find_by(username: username)
     if user
       session[:user_id] = user.id
-      flash[:success] = "Successfully logged in as returning user #{username}"
+      flash[:success] = "Welcome back #{username}"
     else
       user = User.create(username: username)
       session[:user_id] = user.id
-      flash[:success] = "Successfully logged in as new user #{username}"
+      flash[:success] = "Welcome #{username}"
     end
+
+    session[:username] = user.username
 
     redirect_to root_path
     return
