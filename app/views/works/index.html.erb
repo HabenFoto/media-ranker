@@ -1,10 +1,12 @@
-<p id="notice"><%= notice %></p>
+
+<main>
+
+
+<h2>List of Works</h2>
 
 <%= render partial: "work_table", locals: {header: "Albums", works: @albums} %>
 <%= render partial: "work_table", locals: {header: "Books", works: @books} %>
 <%= render partial: "work_table", locals: {header: "Movies", works: @movies} %>
 
+</main>
 
-
-
-<%= link_to 'New Work', new_work_path %>
