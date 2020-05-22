@@ -1,3 +1,5 @@
+<main>
+<section>
 <%= form_with(model: work, local: true) do |form| %>
   <% if work.errors.any? %>
     <div id="error_explanation">
@@ -11,32 +13,34 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div  class="form-group">
     <%= form.label :category %>
-    <%= form.select :category, Category.all.map {|c| [c, c]} %>
+    <%= form.select :category, Category.all.map {|c| [c, c]}, class:"form-control" %>
   </div>
 
-  <div class="field">
+  <div  class="form-group">
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title,  class:"form-control"  %>
   </div>
 
-  <div class="field">
+  <div  class="form-group">
     <%= form.label :creator %>
-    <%= form.text_field :creator %>
+    <%= form.text_field :creator, class:"form-control"  %>
   </div>
 
-  <div class="field">
+  <div  class="form-group">
     <%= form.label :year %>
-    <%= form.number_field :year %>
+    <%= form.number_field :year, class:"form-control"  %>
   </div>
 
-  <div class="field">
+  <div  class="form-group">
     <%= form.label :description %>
-    <%= form.text_field :description %>
+    <%= form.text_field :description, class:"form-control"  %>
   </div>
 
-  <div class="actions">
+  <div  class="form-group">
     <%= form.submit %>
   </div>
 <% end %>
+</section>
+</main>
