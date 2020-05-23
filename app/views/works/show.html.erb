@@ -1,7 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<h2><%= @work.title %></h2>
-
 <p>
   <strong>Category:</strong>
   <%= @work.category %>
@@ -33,7 +31,7 @@
 <%= link_to "Delete", work_path(@work), method: :delete, data: {confirm: "Are you sure you want to delete #{@work.title}?"}, class:"btn btn-danger"%> 
 
 <section class="works-votes__container">
-  <h3 class="works-votes__header"> <%= @work.votes.count%> Vote for this <%= @work.category%></h3>
+  <h2 class="works-votes__header"> <%= @work.votes.count%> Vote for this <%= @work.category%></h3>
   <table class="table">
     <thead>
       <tr>
