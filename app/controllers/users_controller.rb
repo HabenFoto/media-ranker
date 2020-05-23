@@ -1,17 +1,16 @@
 class UsersController < ApplicationController
-  # before_action :set_work, only: [:show, :edit, :update, :destroy, :upvote]
-
+  
   def index
-    @user = User.all
+    @users = User.all
   end
 
   def show
-    @user= current_user
+    user_id = params[:id]
+    @user = User.find_by(id: user_id)
     if @user.nil?
       redirect_to users_path
       return
     end
-
   end
 
 
@@ -45,7 +44,6 @@ class UsersController < ApplicationController
   end
 
   def current
-    @current_user = User.find_by(id: session[:user_id])
     unless @current_user
       flash[:error] = "You must be logged in to see this page"
       redirect_to root_path
