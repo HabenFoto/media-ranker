@@ -1,6 +1,6 @@
 class WorksController < ApplicationController
   before_action :set_work, only: [:show, :edit, :update, :destroy, :upvote]
-
+ 
   # GET /works
 
   def index
@@ -34,12 +34,12 @@ class WorksController < ApplicationController
     end
   end
 
-  # GET /works/1/edit
+  # GET/Works/edit
   def edit
   end
 
   # PATCH/PUT /works/1
-  # PATCH/PUT /works/1.json
+ 
   def update
     if @work.update(work_params)
       flash[:success] = "Work was successfully updated."
@@ -52,27 +52,32 @@ class WorksController < ApplicationController
     end
   end
 
-  # DELETE /works/1
+  # DELETE /works
 
   def destroy
     @work.destroy
-    redirect_to works_url, notice: "Work was successfully destroyed."
+    redirect_to works_url, notice: "Work was successfully deleted."
   end
 
-
+  # POST/Works/
   def upvote # should be a post, and redirect to homepage
-    user = current_user
-    @vote = Vote.new(user_id: user.id, work_id: @work.id)
-
-    if @vote.save # save returns true if the database insert succeeds
-      flash[:success] = " Thank you, your vote as been saved."
-      redirect_to works_path # check  #notice: # go to the index so we can see the book in the list
+    if session[:user_id] 
+      user = current_user
+      @vote = Vote.new(user_id: user.id, work_id: @work.id)
+   
+      if @vote.save # save returns true if the database insert succeeds
+        flash[:success] = " Thank you, your vote has been saved."
+        redirect_to works_path # check  #notice: # go to the index so we can see the book in the list
+        return
+      else # save failed
+        flash[:danger] = "Voting for the same work is not allowed."
+        redirect_to works_path # back to  voting 
       return
-    else # save failed
-      flash[:danger] = "Vote was not successful."
-      redirect_to works_path # back to  voting 
-       
-     return
+      end
+  
+    elsif session[:user_id] == nil
+      flash[:danger] = "You must be loggen in to vote. "
+      redirect_to works_path
     end
     
   end
