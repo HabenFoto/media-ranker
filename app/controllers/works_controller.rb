@@ -67,9 +67,9 @@ class WorksController < ApplicationController
    
       if @vote.save # save returns true if the database insert succeeds
         flash[:success] = " Thank you, your vote has been saved."
-        redirect_to works_path # check  #notice: # go to the index so we can see the book in the list
+        redirect_to works_path notice: # go to the index so we can see the book in the list
         return
-      else # save failed
+      else 
         flash[:danger] = "Voting for the same work is not allowed."
         redirect_to works_path # back to  voting 
       return
