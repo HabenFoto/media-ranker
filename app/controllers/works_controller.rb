@@ -1,31 +1,29 @@
 class WorksController < ApplicationController
   before_action :set_work, only: [:show, :edit, :update, :destroy, :upvote]
- 
-  # GET /works
 
+  # GET
   def index
     @books = Work.books
     @albums = Work.albums
     @movies = Work.movies
   end
 
-  # GET /works/1
+  # GET
   def show
   end
 
-  # GET /works/new
+  # GET
   def new
     @work = Work.new
   end
 
-  # POST /works
-
+  # POST
   def create
     @work = Work.new(work_params)
 
     if @work.save ## save returns true if the database insert succeeds
       flash[:success] = "Work was successfully created."
-      redirect_to @work #notice: # go to the index so we can see the book in the list
+      redirect_to @work  # go to the index so we can see the book in the list
       return
     else # save failed
       flash.now[:error] = "Work was not created."
@@ -34,16 +32,16 @@ class WorksController < ApplicationController
     end
   end
 
-  # GET/Works/edit
+  # GET
   def edit
   end
 
-  # PATCH/PUT /works/1
- 
+  # PATCH/PUT
+
   def update
     if @work.update(work_params)
       flash[:success] = "Work was successfully updated."
-      redirect_to @work #notice:
+      redirect_to @work
       return
     else
       flash.now[:error] = "Work was not found."
@@ -52,36 +50,33 @@ class WorksController < ApplicationController
     end
   end
 
-  # DELETE /works
+  # DELETE
 
   def destroy
     @work.destroy
     redirect_to works_url, notice: "Work was successfully deleted."
   end
 
-  # POST/Works/
+  # POST
   def upvote # should be a post, and redirect to homepage
-    if session[:user_id] 
+    if session[:user_id]
       user = current_user
       @vote = Vote.new(user_id: user.id, work_id: @work.id)
-   
+
       if @vote.save # save returns true if the database insert succeeds
         flash[:success] = " Thank you, your vote has been saved."
         redirect_to works_path  # go to the index so we can see the book in the list
         return
-      else 
+      else
         flash[:danger] = "Voting for the same work is not allowed."
-        redirect_to works_path # back to  voting 
-      return
+        redirect_to works_path # back to voting
+        return
       end
-  
     elsif session[:user_id] == nil
       flash[:danger] = "You must be loggen in to vote. "
       redirect_to works_path
     end
-    
   end
-      
 
   private
 

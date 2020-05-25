@@ -3,5 +3,4 @@ class Category
   def self.all
     %i[album book movie]
   end
-
 end
